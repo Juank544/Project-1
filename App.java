@@ -9,12 +9,6 @@ public class App {
     public static void main(String[] args) {
 
         F1Service.create();
-//        for (Team team : F1Service.teams) {
-//            System.out.println(team.getName());
-//        }
-//
-//        System.out.println("===========================================");
-//
 //        for (Driver driver:F1Service.drivers) {
 //            System.out.println(driver.getName()+"---"+driver.getTeam().getName());
 //        }

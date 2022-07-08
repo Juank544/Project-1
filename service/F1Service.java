@@ -20,7 +20,8 @@ public class F1Service {
     public static void create() {
         createTeams();
         createDrivers();
-        contractDriver();
+        setTeamtoDriver();
+        setDriverstoTeam();
     }
 
     private static void createTeams() {
@@ -38,37 +39,58 @@ public class F1Service {
     }
 
     private static void createDrivers() {
-        Driver ver = new Driver("1", "Max Verstappen", "Netherlands", 1, teams.stream().filter(team -> team.getCar().equals("RB18")).findAny().get());
-        Driver per = new Driver("11", "Sergio Perez", "Mexico", 0, teams.stream().filter(team -> team.getCar().equals("RB18")).findAny().get());
-
-        Driver ham = new Driver("44", "Lewis Hamilton", "United Kingdom", 7, teams.stream().filter(team -> team.getCar().equals("W13")).findAny().get());
-        Driver rus = new Driver("63", "George Russell", "United Kingdom", 0, teams.stream().filter(team -> team.getCar().equals("W13")).findAny().get());
-
-        Driver lec = new Driver("16", "Charles Lecrec", "Monaco", 0, teams.stream().filter(team -> team.getCar().equals("F1-75")).findAny().get());
-        Driver sai = new Driver("55", "Carlos Sainz", "Spain", 0, teams.stream().filter(team -> team.getCar().equals("F1-75")).findAny().get());
-
-        Driver nor = new Driver("4", "Lando Norris", "United Kingdom", 0, teams.stream().filter(team -> team.getCar().equals("MCL36")).findAny().get());
-        Driver ric = new Driver("3", "Daniel Ricciardo", "Australia", 0, teams.stream().filter(team -> team.getCar().equals("MCL36")).findAny().get());
-        Driver alo = new Driver("14", "Fernando Alonso", "Spain", 2, teams.stream().filter(team -> team.getCar().equals("A522")).findAny().get());
-        Driver oco = new Driver("31", "Esteban Ocon", "France", 0, teams.stream().filter(team -> team.getCar().equals("A522")).findAny().get());
-        Driver bot = new Driver("77", "Valtteri Bottas", "Finland", 0, teams.stream().filter(team -> team.getCar().equals("C42")).findAny().get());
-        Driver zho = new Driver("24", "Zhou Guanyu", "China", 0, teams.stream().filter(team -> team.getCar().equals("C42")).findAny().get());
-        Driver gas = new Driver("10", "Pierre Gasly", "France", 0, teams.stream().filter(team -> team.getCar().equals("AT03")).findAny().get());
-        Driver tsu = new Driver("22", "Yuki Tsunoda", "Japan", 0, teams.stream().filter(team -> team.getCar().equals("AT03")).findAny().get());
-        Driver msc = new Driver("47", "Mick Schumacher", "Germany", 0, teams.stream().filter(team -> team.getCar().equals("VF-22")).findAny().get());
-        Driver mag = new Driver("20", "Kevin Magnussen", "Denmark", 0, teams.stream().filter(team -> team.getCar().equals("VF-22")).findAny().get());
-        Driver vet = new Driver("5", "Sebastian Vettel", "Germany", 4, teams.stream().filter(team -> team.getCar().equals("AMR22")).findAny().get());
-        Driver str = new Driver("18", "Lance Stroll", "Canada", 0, teams.stream().filter(team -> team.getCar().equals("AMR22")).findAny().get());
-        Driver alb = new Driver("23", "Alexander Albon", "Thailand", 0, teams.stream().filter(team -> team.getCar().equals("FW44")).findAny().get());
-        Driver lat = new Driver("6", "Nicholas Latifi", "Canada", 0, teams.stream().filter(team -> team.getCar().equals("FW44")).findAny().get());
+        Driver ver = new Driver("1", "Max Verstappen", "Netherlands", 1, null);
+        Driver per = new Driver("11", "Sergio Perez", "Mexico", 0, null);
+        Driver ham = new Driver("44", "Lewis Hamilton", "United Kingdom", 7, null);
+        Driver rus = new Driver("63", "George Russell", "United Kingdom", 0, null);
+        Driver lec = new Driver("16", "Charles Lecrec", "Monaco", 0, null);
+        Driver sai = new Driver("55", "Carlos Sainz", "Spain", 0, null);
+        Driver nor = new Driver("4", "Lando Norris", "United Kingdom", 0, null);
+        Driver ric = new Driver("3", "Daniel Ricciardo", "Australia", 0, null);
+        Driver alo = new Driver("14", "Fernando Alonso", "Spain", 2, null);
+        Driver oco = new Driver("31", "Esteban Ocon", "France", 0, null);
+        Driver bot = new Driver("77", "Valtteri Bottas", "Finland", 0, null);
+        Driver zho = new Driver("24", "Zhou Guanyu", "China", 0, null);
+        Driver gas = new Driver("10", "Pierre Gasly", "France", 0, null);
+        Driver tsu = new Driver("22", "Yuki Tsunoda", "Japan", 0, null);
+        Driver msc = new Driver("47", "Mick Schumacher", "Germany", 0, null);
+        Driver mag = new Driver("20", "Kevin Magnussen", "Denmark", 0, null);
+        Driver vet = new Driver("5", "Sebastian Vettel", "Germany", 4, null);
+        Driver str = new Driver("18", "Lance Stroll", "Canada", 0, null);
+        Driver alb = new Driver("23", "Alexander Albon", "Thailand", 0, null);
+        Driver lat = new Driver("6", "Nicholas Latifi", "Canada", 0, null);
         drivers.addAll(Arrays.asList(ver, per, ham, rus, lec, sai, nor, ric, alo, oco, bot, zho, gas, tsu, msc, mag, vet, str, alb, lat));
     }
 
-    public static void contractDriver() {
+    public static void setDriverstoTeam() {
         teams.forEach(team ->
           team.setDrivers(drivers.stream()
                   .filter(driver -> driver.getTeam().getCar().equals(team.getCar())).collect(Collectors.toList())
           )
         );
+    }
+
+    public static void setTeamtoDriver(){
+        for (Driver driver :drivers) {
+            if (driver.getNumber().equals("1") || driver.getNumber().equals("11")){
+                driver.setTeam(teams.stream().filter(team -> team.getCar().equals("RB18")).findAny().get());
+            } else if (driver.getNumber().equals("44") || driver.getNumber().equals("63")) {
+                driver.setTeam(teams.stream().filter(team -> team.getCar().equals("W13")).findAny().get());
+            } else if (driver.getNumber().equals("16") || driver.getNumber().equals("55")) {
+                driver.setTeam(teams.stream().filter(team -> team.getCar().equals("F1-75")).findAny().get());
+            } else if (driver.getNumber().equals("4") || driver.getNumber().equals("3")) {
+                driver.setTeam(teams.stream().filter(team -> team.getCar().equals("MCL36")).findAny().get());
+            } else if (driver.getNumber().equals("14") || driver.getNumber().equals("31")) {
+                driver.setTeam(teams.stream().filter(team -> team.getCar().equals("A522")).findAny().get());
+            } else if (driver.getNumber().equals("77") || driver.getNumber().equals("24")) {
+                driver.setTeam(teams.stream().filter(team -> team.getCar().equals("C42")).findAny().get());
+            } else if (driver.getNumber().equals("10") || driver.getNumber().equals("22")) {
+                driver.setTeam(teams.stream().filter(team -> team.getCar().equals("AT03")).findAny().get());
+            } else if (driver.getNumber().equals("47") || driver.getNumber().equals("20")) {
+                driver.setTeam(teams.stream().filter(team -> team.getCar().equals("VF-22")).findAny().get());
+            } else if (driver.getNumber().equals("5") || driver.getNumber().equals("18")) {
+                driver.setTeam(teams.stream().filter(team -> team.getCar().equals("AMR22")).findAny().get());
+            }else driver.setTeam(teams.stream().filter(team -> team.getCar().equals("FW44")).findAny().get());
+        }
     }
 }

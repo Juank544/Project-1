@@ -34,4 +34,8 @@ public class Driver {
     public Team getTeam() {
         return team;
     }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
 }
