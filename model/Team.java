@@ -1,6 +1,5 @@
 package model;
 
-import java.beans.Transient;
 import java.util.List;
 
 public class Team {
@@ -48,5 +47,12 @@ public class Team {
 
     public void setDrivers(List<Driver> drivers) {
         this.drivers = drivers;
+    }
+
+    @Override
+    public String toString() {
+        //return super.toString();
+        return "El nombre del equipo es: "+name+"\n"
+                +"y sus pilotos son:"+drivers.toString()+"\n";
     }
 }
