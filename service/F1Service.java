@@ -72,25 +72,27 @@ public class F1Service {
 
     public static void setTeamtoDriver(){
         for (Driver driver :drivers) {
-            if (driver.getNumber().equals("1") || driver.getNumber().equals("11")){
-                driver.setTeam(teams.stream().filter(team -> team.getCar().equals("RB18")).findAny().get());
-            } else if (driver.getNumber().equals("44") || driver.getNumber().equals("63")) {
-                driver.setTeam(teams.stream().filter(team -> team.getCar().equals("W13")).findAny().get());
-            } else if (driver.getNumber().equals("16") || driver.getNumber().equals("55")) {
-                driver.setTeam(teams.stream().filter(team -> team.getCar().equals("F1-75")).findAny().get());
-            } else if (driver.getNumber().equals("4") || driver.getNumber().equals("3")) {
-                driver.setTeam(teams.stream().filter(team -> team.getCar().equals("MCL36")).findAny().get());
-            } else if (driver.getNumber().equals("14") || driver.getNumber().equals("31")) {
-                driver.setTeam(teams.stream().filter(team -> team.getCar().equals("A522")).findAny().get());
-            } else if (driver.getNumber().equals("77") || driver.getNumber().equals("24")) {
-                driver.setTeam(teams.stream().filter(team -> team.getCar().equals("C42")).findAny().get());
-            } else if (driver.getNumber().equals("10") || driver.getNumber().equals("22")) {
-                driver.setTeam(teams.stream().filter(team -> team.getCar().equals("AT03")).findAny().get());
-            } else if (driver.getNumber().equals("47") || driver.getNumber().equals("20")) {
-                driver.setTeam(teams.stream().filter(team -> team.getCar().equals("VF-22")).findAny().get());
-            } else if (driver.getNumber().equals("5") || driver.getNumber().equals("18")) {
-                driver.setTeam(teams.stream().filter(team -> team.getCar().equals("AMR22")).findAny().get());
-            }else driver.setTeam(teams.stream().filter(team -> team.getCar().equals("FW44")).findAny().get());
+            switch (driver.getNumber()) {
+                case "1", "11" ->
+                        driver.setTeam(teams.stream().filter(team -> team.getCar().equals("RB18")).findAny().get());
+                case "44", "63" ->
+                        driver.setTeam(teams.stream().filter(team -> team.getCar().equals("W13")).findAny().get());
+                case "16", "55" ->
+                        driver.setTeam(teams.stream().filter(team -> team.getCar().equals("F1-75")).findAny().get());
+                case "4", "3" ->
+                        driver.setTeam(teams.stream().filter(team -> team.getCar().equals("MCL36")).findAny().get());
+                case "14", "31" ->
+                        driver.setTeam(teams.stream().filter(team -> team.getCar().equals("A522")).findAny().get());
+                case "77", "24" ->
+                        driver.setTeam(teams.stream().filter(team -> team.getCar().equals("C42")).findAny().get());
+                case "10", "22" ->
+                        driver.setTeam(teams.stream().filter(team -> team.getCar().equals("AT03")).findAny().get());
+                case "47", "20" ->
+                        driver.setTeam(teams.stream().filter(team -> team.getCar().equals("VF-22")).findAny().get());
+                case "5", "18" ->
+                        driver.setTeam(teams.stream().filter(team -> team.getCar().equals("AMR22")).findAny().get());
+                default -> driver.setTeam(teams.stream().filter(team -> team.getCar().equals("FW44")).findAny().get());
+            }
         }
     }
 }
