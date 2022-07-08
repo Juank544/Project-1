@@ -16,19 +16,6 @@ public class App {
 //            System.out.println(driver.getName()+"---"+driver.getTeam().getName());
 //        }
 
-//        for (Team team: F1Service.teams){
-//            System.out.println(team.getName());
-//
-//            List<Driver> teamDrivers = team.getDrivers();
-//            Iterator<Driver> iterator = teamDrivers.iterator();
-//
-//            while (iterator.hasNext()){
-//                System.out.println(iterator.next().getName());
-//            }
-//
-//            System.out.println("=======================");
-//        }
-
         for (Team team:F1Service.teams) {
             System.out.println(team.toString());
         }

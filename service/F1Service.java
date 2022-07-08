@@ -11,12 +11,6 @@ public class F1Service {
     public static List<Driver> drivers = new ArrayList<>();
     public static Set<Team> teams = new HashSet<>();
 
-    /*
-        Team redB = new Team("Oracle Red Bull Racing",4,"Christian Horner","RB18","Red Bull Powertrains",null);
-        Driver ver = new Driver("1","Max Verstappen","Netherlands",1,redB);
-        Driver per = new Driver("11","Sergio Perez","Mexico",0,redB);
-        redB.setDrivers(List.of(ver,per));
-     */
     public static void create() {
         createTeams();
         createDrivers();
