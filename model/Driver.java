@@ -1,22 +1,16 @@
 package model;
 
 public class Driver {
-    private String number;
     private String name;
     private String country;
     private Integer championships;
     private Team team;
 
-    public Driver(String number,String name, String country, Integer championships, Team team) {
-        this.number = number;
+    public Driver(String name, String country, Integer championships, Team team) {
         this.name = name;
         this.country = country;
         this.championships = championships;
         this.team = team;
-    }
-
-    public String getNumber() {
-        return number;
     }
 
     public String getName() {
