@@ -2,9 +2,6 @@ import model.Driver;
 import model.Team;
 import service.F1Service;
 
-import java.util.Iterator;
-import java.util.List;
-
 //TODO porque es importante el hashcode
 //TODO implementar algo en este proyecto con hashmap y set
 //TODO Implementarlo con un toString() y que imprima lo mismo en consola
