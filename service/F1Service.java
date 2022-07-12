@@ -11,6 +11,7 @@ public class F1Service {
     public static List<Driver> drivers = new ArrayList<>();
     public static Map<String, Team> teams = new HashMap<>();
     public static Map<Integer,Driver> map = new HashMap<>();
+    public static Set<String> countries = new HashSet<>();
 
     public static void create() {
         createTeams();
@@ -18,6 +19,7 @@ public class F1Service {
         addDriverstoList();
         setTeamtoDriver();
         setDriverstoTeam();
+        setCountries();
     }
 
     private static void createTeams() {
@@ -94,5 +96,9 @@ public class F1Service {
         for (Integer key : map.keySet()) {
             drivers.add(map.get(key));
         }
+    }
+
+    private static void setCountries(){
+        drivers.forEach(driver -> countries.add(driver.getCountry()));
     }
 }
