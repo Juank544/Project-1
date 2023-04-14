@@ -13,9 +13,14 @@ public class App {
 //            System.out.println(driver.getName()+"---"+driver.getTeam().getName());
 //        }
 
-        for (Team team:F1Service.teams) {
-            System.out.println(team.toString());
+        for (String key:F1Service.teams.keySet()) {
+            System.out.println(F1Service.teams.get(key));
         }
 
+        System.out.println("tamaño lista drivers: "+F1Service.drivers.size());
+        System.out.println("tamaño map teams: "+F1Service.teams.size());
+        System.out.println("tamaño map: "+F1Service.map.size());
+
+        System.out.println("\ntamaño set paises: "+F1Service.countries.size());
     }
 }

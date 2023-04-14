@@ -9,8 +9,9 @@ import java.util.stream.Collectors;
 public class F1Service {
 
     public static List<Driver> drivers = new ArrayList<>();
-    public static Set<Team> teams = new HashSet<>();
+    public static Map<String, Team> teams = new HashMap<>();
     public static Map<Integer,Driver> map = new HashMap<>();
+    public static Set<String> countries = new HashSet<>();
 
     public static void create() {
         createTeams();
@@ -18,19 +19,20 @@ public class F1Service {
         addDriverstoList();
         setTeamtoDriver();
         setDriverstoTeam();
+        setCountries();
     }
 
     private static void createTeams() {
-        teams.add(new Team("Oracle Red Bull Racing", 4, "Christian Horner", "RB18", "Red Bull Powertrains", null));
-        teams.add(new Team("Mercedes-AMG Petronas F1 Team", 8, "Toto Wolf", "W13", "Mercedes", null));
-        teams.add(new Team("Scuderia Ferrari", 16, "Mattia Binotto", "F1-75", "Ferrari", null));
-        teams.add(new Team("Mclaren F1 Team", 8, "Andreas Seidl", "MCL36", "Mercedes", null));
-        teams.add(new Team("BWT Alpine F1 Team", 2, "Otmar Szafnauer", "A522", "Renault", null));
-        teams.add(new Team("Alfa Romeo F1 Team ORLEN", 0, "Frederic Vasseur", "C42", "Ferrari", null));
-        teams.add(new Team("Scuderia AlphaTauri", 0, "Franz Tost", "AT03", "Red Bull Powertrains", null));
-        teams.add(new Team("Hass F1 Team", 0, "Frederic Vasseur", "VF-22", "Ferrari", null));
-        teams.add(new Team("Aston Martin Aramco Cognizant F1 Team", 0, "Mike Krack", "AMR22", "Mercedes", null));
-        teams.add(new Team("Williams Racing", 9, "Jost Capito", "FW44", "Mercedes", null));
+        teams.put("RB18", new Team("Oracle Red Bull Racing", 4, "Christian Horner", "Red Bull Powertrains", null));
+        teams.put("W13", new Team("Mercedes-AMG Petronas F1 Team", 8, "Toto Wolf", "Mercedes", null));
+        teams.put("F1-75", new Team("Scuderia Ferrari", 16, "Mattia Binotto", "Ferrari", null));
+        teams.put("MCL36", new Team("Mclaren F1 Team", 8, "Andreas Seidl", "Mercedes", null));
+        teams.put("A522", new Team("BWT Alpine F1 Team", 2, "Otmar Szafnauer", "Renault", null));
+        teams.put("C42", new Team("Alfa Romeo F1 Team ORLEN", 0, "Frederic Vasseur", "Ferrari", null));
+        teams.put("AT03", new Team("Scuderia AlphaTauri", 0, "Franz Tost", "Red Bull Powertrains", null));
+        teams.put("VF-22", new Team("Hass F1 Team", 0, "Frederic Vasseur", "Ferrari", null));
+        teams.put("AMR22", new Team("Aston Martin Aramco Cognizant F1 Team", 0, "Mike Krack", "Mercedes", null));
+        teams.put("FW44", new Team("Williams Racing", 9, "Jost Capito", "Mercedes", null));
     }
 
     private static void createDrivers() {
@@ -57,10 +59,10 @@ public class F1Service {
     }
 
     private static void setDriverstoTeam() {
-        teams.forEach(team ->
-          team.setDrivers(drivers.stream()
-                  .filter(driver -> driver.getTeam().getCar().equals(team.getCar())).collect(Collectors.toList())
-          )
+        teams.forEach((car, team) ->
+                team.setDrivers(drivers.stream()
+                        .filter(driver -> driver.getTeam().equals(teams.get(car))).collect(Collectors.toList())
+                )
         );
     }
 
@@ -68,24 +70,24 @@ public class F1Service {
         for (Integer key : map.keySet()){
             switch (key){
                 case 1, 11 ->
-                        map.get(key).setTeam(teams.stream().filter(team -> team.getCar().equals("RB18")).findAny().get());
+                        map.get(key).setTeam(teams.get("RB18"));
                 case 44, 63 ->
-                        map.get(key).setTeam(teams.stream().filter(team -> team.getCar().equals("W13")).findAny().get());
+                        map.get(key).setTeam(teams.get("W13"));
                 case 16, 55 ->
-                        map.get(key).setTeam(teams.stream().filter(team -> team.getCar().equals("F1-75")).findAny().get());
+                        map.get(key).setTeam(teams.get("F1-75"));
                 case 4, 3 ->
-                        map.get(key).setTeam(teams.stream().filter(team -> team.getCar().equals("MCL36")).findAny().get());
+                        map.get(key).setTeam(teams.get("MCL36"));
                 case 14, 31 ->
-                        map.get(key).setTeam(teams.stream().filter(team -> team.getCar().equals("A522")).findAny().get());
+                        map.get(key).setTeam(teams.get("A522"));
                 case 77, 24 ->
-                        map.get(key).setTeam(teams.stream().filter(team -> team.getCar().equals("C42")).findAny().get());
+                        map.get(key).setTeam(teams.get("C42"));
                 case 10, 22 ->
-                        map.get(key).setTeam(teams.stream().filter(team -> team.getCar().equals("AT03")).findAny().get());
+                        map.get(key).setTeam(teams.get("AT03"));
                 case 47, 20 ->
-                        map.get(key).setTeam(teams.stream().filter(team -> team.getCar().equals("VF-22")).findAny().get());
+                        map.get(key).setTeam(teams.get("VF-22"));
                 case 5, 18 ->
-                        map.get(key).setTeam(teams.stream().filter(team -> team.getCar().equals("AMR22")).findAny().get());
-                default -> map.get(key).setTeam(teams.stream().filter(team -> team.getCar().equals("FW44")).findAny().get());
+                        map.get(key).setTeam(teams.get("AMR22"));
+                default -> map.get(key).setTeam(teams.get("FW44"));
             }
         }
     }
@@ -94,5 +96,9 @@ public class F1Service {
         for (Integer key : map.keySet()) {
             drivers.add(map.get(key));
         }
+    }
+
+    private static void setCountries(){
+        drivers.forEach(driver -> countries.add(driver.getCountry()));
     }
 }
